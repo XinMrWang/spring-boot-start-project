@@ -7,4 +7,9 @@ package com.lsc.startproject.common.constant;
 public interface ResponseCodeConstants {
     Integer SUCCESS = 200;
     Integer FAILED = 500;
+    Integer NO_AUTHORITY = 600;
+    Integer NO_LOGIN_IN = 601;
+    Integer LOGIN_FAILURE = 602;
+    Integer LOGIN_SUCCESS = 603;
+    Integer LOGOUT_SUCCESS = 604;
 }

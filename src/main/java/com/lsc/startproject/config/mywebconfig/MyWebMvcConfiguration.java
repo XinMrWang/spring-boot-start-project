@@ -1,4 +1,4 @@
-package com.lsc.startproject.config;
+package com.lsc.startproject.config.mywebconfig;
 
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;

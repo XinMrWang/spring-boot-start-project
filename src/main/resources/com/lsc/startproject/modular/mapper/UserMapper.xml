@@ -4,8 +4,8 @@
   <resultMap id="BaseResultMap" type="com.lsc.startproject.common.entity.User">
     <!--@mbg.generated-->
     <!--@Table mgt_user-->
-    <id column="uuid" jdbcType="VARCHAR" property="uuid" />
-    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
@@ -19,42 +19,42 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    uuid, user_name, `password`, email, area_code, phone, regist_time, `status`, mark_deleted, 
+    user_id, user_name, `password`, email, area_code, phone, regist_time, `status`, mark_deleted, 
     gmt_modified, last_login_time, head_pic
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from mgt_user
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
     delete from mgt_user
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.lsc.startproject.common.entity.User">
     <!--@mbg.generated-->
-    insert into mgt_user (uuid, user_name, `password`, 
-      email, area_code, phone, 
-      regist_time, `status`, mark_deleted, 
-      gmt_modified, last_login_time, head_pic
-      )
-    values (#{uuid,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{registTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{markDeleted,jdbcType=BOOLEAN}, 
-      #{gmtModified,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{headPic,jdbcType=VARCHAR}
-      )
+    insert into mgt_user (user_id, user_name, `password`,
+    email, area_code, phone,
+    regist_time, `status`, mark_deleted,
+    gmt_modified, last_login_time, head_pic
+    )
+    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+    #{email,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+    #{registTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{markDeleted,jdbcType=BOOLEAN},
+    #{gmtModified,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{headPic,jdbcType=VARCHAR}
+    )
   </insert>
   <insert id="insertSelective" parameterType="com.lsc.startproject.common.entity.User">
     <!--@mbg.generated-->
     insert into mgt_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        uuid,
+      <if test="userId != null">
+        user_id,
       </if>
-      <if test="userName != null">
+      <if test="username != null">
         user_name,
       </if>
       <if test="password != null">
@@ -89,11 +89,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uuid != null">
-        #{uuid,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
       </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
@@ -131,8 +131,8 @@
     <!--@mbg.generated-->
     update mgt_user
     <set>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
+      <if test="username != null">
+        user_name = #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
@@ -165,23 +165,23 @@
         head_pic = #{headPic,jdbcType=VARCHAR},
       </if>
     </set>
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lsc.startproject.common.entity.User">
     <!--@mbg.generated-->
     update mgt_user
-    set user_name = #{userName,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      area_code = #{areaCode,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      regist_time = #{registTime,jdbcType=TIMESTAMP},
-      `status` = #{status,jdbcType=TINYINT},
-      mark_deleted = #{markDeleted,jdbcType=BOOLEAN},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-      head_pic = #{headPic,jdbcType=VARCHAR}
-    where uuid = #{uuid,jdbcType=VARCHAR}
+    set user_name = #{username,jdbcType=VARCHAR},
+    `password` = #{password,jdbcType=VARCHAR},
+    email = #{email,jdbcType=VARCHAR},
+    area_code = #{areaCode,jdbcType=VARCHAR},
+    phone = #{phone,jdbcType=VARCHAR},
+    regist_time = #{registTime,jdbcType=TIMESTAMP},
+    `status` = #{status,jdbcType=TINYINT},
+    mark_deleted = #{markDeleted,jdbcType=BOOLEAN},
+    gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+    last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+    head_pic = #{headPic,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=BIGINT}
   </update>
   <update id="updateBatch" parameterType="java.util.List">
     <!--@mbg.generated-->
@@ -189,77 +189,77 @@
     <trim prefix="set" suffixOverrides=",">
       <trim prefix="user_name = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.userName,jdbcType=VARCHAR}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.username,jdbcType=VARCHAR}
         </foreach>
       </trim>
       <trim prefix="`password` = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.password,jdbcType=VARCHAR}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
         </foreach>
       </trim>
       <trim prefix="email = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.email,jdbcType=VARCHAR}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.email,jdbcType=VARCHAR}
         </foreach>
       </trim>
       <trim prefix="area_code = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.areaCode,jdbcType=VARCHAR}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.areaCode,jdbcType=VARCHAR}
         </foreach>
       </trim>
       <trim prefix="phone = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.phone,jdbcType=VARCHAR}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.phone,jdbcType=VARCHAR}
         </foreach>
       </trim>
       <trim prefix="regist_time = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.registTime,jdbcType=TIMESTAMP}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.registTime,jdbcType=TIMESTAMP}
         </foreach>
       </trim>
       <trim prefix="`status` = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.status,jdbcType=TINYINT}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.status,jdbcType=TINYINT}
         </foreach>
       </trim>
       <trim prefix="mark_deleted = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.markDeleted,jdbcType=BOOLEAN}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.markDeleted,jdbcType=BOOLEAN}
         </foreach>
       </trim>
       <trim prefix="gmt_modified = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.gmtModified,jdbcType=TIMESTAMP}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.gmtModified,jdbcType=TIMESTAMP}
         </foreach>
       </trim>
       <trim prefix="last_login_time = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.lastLoginTime,jdbcType=TIMESTAMP}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.lastLoginTime,jdbcType=TIMESTAMP}
         </foreach>
       </trim>
       <trim prefix="head_pic = case" suffix="end,">
         <foreach collection="list" index="index" item="item">
-          when uuid = #{item.uuid,jdbcType=VARCHAR} then #{item.headPic,jdbcType=VARCHAR}
+          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.headPic,jdbcType=VARCHAR}
         </foreach>
       </trim>
     </trim>
-    where uuid in
+    where user_id in
     <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.uuid,jdbcType=VARCHAR}
+      #{item.userId,jdbcType=BIGINT}
     </foreach>
   </update>
   <insert id="batchInsert" parameterType="map">
     <!--@mbg.generated-->
     insert into mgt_user
-    (uuid, user_name, `password`, email, area_code, phone, regist_time, `status`, mark_deleted, 
-      gmt_modified, last_login_time, head_pic)
+    (user_id, user_name, `password`, email, area_code, phone, regist_time, `status`, 
+      mark_deleted, gmt_modified, last_login_time, head_pic)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.uuid,jdbcType=VARCHAR}, #{item.userName,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, 
-        #{item.email,jdbcType=VARCHAR}, #{item.areaCode,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR}, 
-        #{item.registTime,jdbcType=TIMESTAMP}, #{item.status,jdbcType=TINYINT}, #{item.markDeleted,jdbcType=BOOLEAN}, 
-        #{item.gmtModified,jdbcType=TIMESTAMP}, #{item.lastLoginTime,jdbcType=TIMESTAMP}, 
-        #{item.headPic,jdbcType=VARCHAR})
+      (#{item.userId,jdbcType=BIGINT}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR},
+      #{item.email,jdbcType=VARCHAR}, #{item.areaCode,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR},
+      #{item.registTime,jdbcType=TIMESTAMP}, #{item.status,jdbcType=TINYINT}, #{item.markDeleted,jdbcType=BOOLEAN},
+      #{item.gmtModified,jdbcType=TIMESTAMP}, #{item.lastLoginTime,jdbcType=TIMESTAMP},
+      #{item.headPic,jdbcType=VARCHAR})
     </foreach>
   </insert>
 </mapper>

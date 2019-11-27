@@ -1,5 +1,9 @@
 server:
   port: 8080
+  tomcat:
+    uri-encoding: utf-8
+  servlet:
+    context-path: /
 
 spring:
   mvc:
@@ -59,6 +63,11 @@ spring:
       force: true
       enabled: true
       charset: UTF-8
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+
 
 mybatis:
   configuration:

@@ -5,13 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface PermissionMapper {
-    int deleteByPrimaryKey(String permissionId);
+    int deleteByPrimaryKey(Integer permissionId);
 
     int insert(Permission record);
 
     int insertSelective(Permission record);
 
-    Permission selectByPrimaryKey(String permissionId);
+    Permission selectByPrimaryKey(Integer permissionId);
 
     int updateByPrimaryKeySelective(Permission record);
 

@@ -5,13 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface GroupUserRoleRelationMapper {
-    int deleteByPrimaryKey(@Param("groupId") String groupId, @Param("userId") String userId, @Param("roleId") String roleId);
+    int deleteByPrimaryKey(@Param("groupId") Long groupId, @Param("userId") Long userId, @Param("roleId") Long roleId);
 
     int insert(GroupUserRoleRelation record);
 
     int insertSelective(GroupUserRoleRelation record);
 
-    GroupUserRoleRelation selectByPrimaryKey(@Param("groupId") String groupId, @Param("userId") String userId, @Param("roleId") String roleId);
+    GroupUserRoleRelation selectByPrimaryKey(@Param("groupId") Long groupId, @Param("userId") Long userId, @Param("roleId") Long roleId);
 
     int updateByPrimaryKeySelective(GroupUserRoleRelation record);
 

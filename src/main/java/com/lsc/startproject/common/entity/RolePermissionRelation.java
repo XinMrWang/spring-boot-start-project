@@ -1,34 +1,46 @@
 package com.lsc.startproject.common.entity;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
+/**
+ * 角色权限关系
+ *
+ * @author halink
+ */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RolePermissionRelation {
-    private String roleId;
+    private Long roleId;
 
     /**
-    * 权限id
-    */
-    private String permissionId;
+     * 权限id
+     */
+    private Long permissionId;
 
     /**
-    * 创建用户
-    */
-    private String userCreate;
+     * 创建用户
+     */
+    private Long userCreate;
 
     /**
-    * 修改用户
-    */
-    private String userModified;
+     * 修改用户
+     */
+    private Long userModified;
 
     /**
-    * 创建时间
-    */
+     * 创建时间
+     */
     private Date gmtCreate;
 
     /**
-    * 修改时间
-    */
+     * 修改时间
+     */
     private Date gmtModified;
 }

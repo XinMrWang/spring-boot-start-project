@@ -1,36 +1,47 @@
 package com.lsc.startproject.common.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+/**
+ * 权限资源
+ *
+ * @author halink
+ */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Operation {
-    private String operationId;
+    private Integer operationId;
 
     /**
-    * 操作名称
-    */
+     * 操作名称
+     */
     private String operationName;
-
-    private Integer operationCode;
 
     private String operationDesc;
 
     /**
-    * 请求路径
-    */
+     * 请求路径
+     */
     private String requestUrl;
 
-    private String permissionId;
+    private Integer permissionId;
 
     /**
-    * shiro对应的接口注解
-    */
+     * 接口注解
+     */
     private String perm;
 
     private String route;
 
     /**
-    * 0 路由\\n1 按钮
-    */
+     * 0路由,1按钮
+     */
     private Byte type;
+
+    private Integer operationCode;
 }

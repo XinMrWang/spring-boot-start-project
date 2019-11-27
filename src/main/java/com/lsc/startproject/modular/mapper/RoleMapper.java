@@ -5,13 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
-    int deleteByPrimaryKey(String roleId);
+    int deleteByPrimaryKey(Long roleId);
 
     int insert(Role record);
 
     int insertSelective(Role record);
 
-    Role selectByPrimaryKey(String roleId);
+    Role selectByPrimaryKey(Long roleId);
 
     int updateByPrimaryKeySelective(Role record);
 

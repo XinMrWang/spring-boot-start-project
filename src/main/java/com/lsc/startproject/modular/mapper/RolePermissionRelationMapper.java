@@ -5,13 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface RolePermissionRelationMapper {
-    int deleteByPrimaryKey(@Param("roleId") String roleId, @Param("permissionId") String permissionId);
+    int deleteByPrimaryKey(@Param("roleId") Long roleId, @Param("permissionId") Long permissionId);
 
     int insert(RolePermissionRelation record);
 
     int insertSelective(RolePermissionRelation record);
 
-    RolePermissionRelation selectByPrimaryKey(@Param("roleId") String roleId, @Param("permissionId") String permissionId);
+    RolePermissionRelation selectByPrimaryKey(@Param("roleId") Long roleId, @Param("permissionId") Long permissionId);
 
     int updateByPrimaryKeySelective(RolePermissionRelation record);
 

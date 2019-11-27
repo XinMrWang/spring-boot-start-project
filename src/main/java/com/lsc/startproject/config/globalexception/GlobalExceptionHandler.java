@@ -1,4 +1,4 @@
-package com.lsc.startproject.config;
+package com.lsc.startproject.config.globalexception;
 
 import com.lsc.startproject.common.vo.ResponseResult;
 import com.lsc.startproject.core.util.ExceptionHandlerUtils;

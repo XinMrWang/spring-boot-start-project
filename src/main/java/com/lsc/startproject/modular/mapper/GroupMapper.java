@@ -1,18 +1,17 @@
 package com.lsc.startproject.modular.mapper;
 
 import com.lsc.startproject.common.entity.Group;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 public interface GroupMapper {
-    int deleteByPrimaryKey(String groupId);
+    int deleteByPrimaryKey(Integer groupId);
 
     int insert(Group record);
 
     int insertSelective(Group record);
 
-    Group selectByPrimaryKey(String groupId);
+    Group selectByPrimaryKey(Integer groupId);
 
     int updateByPrimaryKeySelective(Group record);
 

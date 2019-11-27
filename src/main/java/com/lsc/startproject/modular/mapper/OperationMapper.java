@@ -5,13 +5,13 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface OperationMapper {
-    int deleteByPrimaryKey(String operationId);
+    int deleteByPrimaryKey(Integer operationId);
 
     int insert(Operation record);
 
     int insertSelective(Operation record);
 
-    Operation selectByPrimaryKey(String operationId);
+    Operation selectByPrimaryKey(Integer operationId);
 
     int updateByPrimaryKeySelective(Operation record);
 

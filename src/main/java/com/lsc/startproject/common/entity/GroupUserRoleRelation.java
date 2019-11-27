@@ -1,35 +1,47 @@
 package com.lsc.startproject.common.entity;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
+/**
+ *
+ * 组,用户,角色关系
+ * @author halink
+ */
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GroupUserRoleRelation {
     /**
     * 群组id
     */
-    private String groupId;
+    private Long groupId;
 
     /**
     * 用户id
     */
-    private String userId;
+    private Long userId;
 
     /**
     * 角色id
 role_id = 0 owner 为群主
     */
-    private String roleId;
+    private Long roleId;
 
     /**
     * 创建用户
     */
-    private String userCreate;
+    private Long userCreate;
 
     /**
     * 修改用户
     */
-    private String userModified;
+    private Long userModified;
 
     /**
     * 创建时间

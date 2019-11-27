@@ -1,6 +1,5 @@
 package com.lsc.startproject.core.util;
 
-import com.alibaba.druid.util.HttpClientUtils;
 import com.lsc.startproject.common.constant.ResponseCodeConstants;
 import com.lsc.startproject.common.constant.ResponseMessageConstants;
 import com.lsc.startproject.common.vo.ResponseResult;
@@ -25,5 +24,11 @@ public class ResultUtil {
                 .code(ResponseCodeConstants.FAILED)
                 .data(data)
                 .message(ResponseMessageConstants.FAILED).build();
+    }
+
+    public static ResponseResult response(Integer code, String message) {
+        return ResponseResult.builder()
+                .code(code)
+                .message(message).build();
     }
 }

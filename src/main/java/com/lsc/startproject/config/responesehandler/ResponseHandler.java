@@ -1,4 +1,4 @@
-package com.lsc.startproject.config;
+package com.lsc.startproject.config.responesehandler;
 
 
 import com.lsc.startproject.common.vo.ResponseResult;
