@@ -1,5 +1,6 @@
 package com.lsc.startproject.modular.service.impl;
 
+import com.lsc.startproject.common.dto.UserDto;
 import com.lsc.startproject.common.entity.User;
 import com.lsc.startproject.modular.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
 
     /**
      * 若使用security表单鉴权则需实现该方法，通过username获取用户信息（密码、权限等等）
+     *
      * @param username
      * @return
      * @throws UsernameNotFoundException
@@ -36,16 +38,19 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //通过username查询用户
         User user = userMapper.selectByPrimaryKey(1L);
-        if(user == null){
+        if (user == null) {
             //仍需要细化处理
             throw new UsernameNotFoundException("该用户不存在");
         }
-        Set authoritiesSet = new HashSet();
+        Set<SimpleGrantedAuthority> authoritiesSet = new HashSet<>();
         // 模拟从数据库中获取用户权限
         authoritiesSet.add(new SimpleGrantedAuthority("test:list"));
         authoritiesSet.add(new SimpleGrantedAuthority("test:add"));
-        log.info("用户{}验证通过",username);
-        return user;
+        log.info("用户{}验证通过", username);
+        return UserDto.builder().id(user.getUserId())
+                .password(user.getPassword())
+                .username(user.getUsername())
+                .authorities(authoritiesSet).build();
     }
 
 }

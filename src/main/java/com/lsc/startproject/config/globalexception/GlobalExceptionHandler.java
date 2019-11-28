@@ -24,5 +24,4 @@ public class GlobalExceptionHandler {
         log.error("system error - ", e);
         return ExceptionHandlerUtils.restApiExceptionHandler(e);
     }
-
 }

@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * @author halink
+ */
 public class AutoConversionHandler <E extends Enum<E>> extends BaseTypeHandler<E> {
 
     private BaseTypeHandler typeHandler;
