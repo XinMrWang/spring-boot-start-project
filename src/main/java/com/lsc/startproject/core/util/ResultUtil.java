@@ -31,4 +31,11 @@ public class ResultUtil {
                 .code(code)
                 .message(message).build();
     }
+
+    public static ResponseResult response(Integer code, Object data, String message) {
+        return ResponseResult.builder()
+                .data(data)
+                .code(code)
+                .message(message).build();
+    }
 }
