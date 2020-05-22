@@ -17,7 +17,7 @@ public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeH
 
   private Class<E> type;
 
-  CodeEnumTypeHandler(Class<E> type) {
+  public CodeEnumTypeHandler(Class<E> type) {
     if (type == null) {
       throw new IllegalArgumentException("Type argument cannot be null");
     }
@@ -32,13 +32,14 @@ public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeH
 
   @Override
   public E getNullableResult(ResultSet rs, String columnName) throws SQLException {
+    int i = rs.getInt(columnName);
     if (rs.wasNull()) {
       return null;
     } else {
       try {
-        return CodeEnumUtil.codeOf(type, rs.getInt(columnName));
+        return CodeEnumUtil.codeOf(type, i);
       } catch (Exception ex) {
-        throw new IllegalArgumentException("Cannot convert " + rs.getInt(columnName) + " to " + type.getSimpleName() + " by ordinal value.",
+        throw new IllegalArgumentException("Cannot convert " + i + " to " + type.getSimpleName() + " by ordinal value.",
                 ex);
       }
     }
@@ -46,13 +47,14 @@ public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeH
 
   @Override
   public E getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
+    int i = rs.getInt(columnIndex);
     if (rs.wasNull()) {
       return null;
     } else {
       try {
-        return CodeEnumUtil.codeOf(type, rs.getInt(columnIndex));
+        return CodeEnumUtil.codeOf(type, i);
       } catch (Exception ex) {
-        throw new IllegalArgumentException("Cannot convert " + rs.getInt(columnIndex) + " to " + type.getSimpleName() + " by ordinal value.",
+        throw new IllegalArgumentException("Cannot convert " + i + " to " + type.getSimpleName() + " by ordinal value.",
                 ex);
       }
     }
@@ -60,13 +62,14 @@ public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeH
 
   @Override
   public E getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
+    int i = cs.getInt(columnIndex);
     if (cs.wasNull()) {
       return null;
     } else {
       try {
-        return CodeEnumUtil.codeOf(type, cs.getInt(columnIndex));
+        return CodeEnumUtil.codeOf(type, i);
       } catch (Exception ex) {
-        throw new IllegalArgumentException("Cannot convert " + cs.getInt(columnIndex) + " to " + type.getSimpleName() + " by ordinal value.",
+        throw new IllegalArgumentException("Cannot convert " + i + " to " + type.getSimpleName() + " by ordinal value.",
                 ex);
       }
     }
