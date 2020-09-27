@@ -5,10 +5,11 @@ import com.halink.scaffold.common.enumerate.UserStatuesEnum;
 import com.halink.scaffold.common.vo.user.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 /**
@@ -16,12 +17,13 @@ import java.util.Date;
  * @date 2019/11/26 5:04 下午
  */
 @Api(tags = "测试")
+@Validated
 @RestController
 public class LoginController {
 
-    @PostMapping("/login")
+    @RequestMapping("/login")
     @ApiOperation("测试接口")
-    public UserVo login(@RequestBody UserVo userVos) {
+    public UserVo login(@NotEmpty(message = "这玩意儿不能为空") String a) {
         return UserVo.builder()
                 .areaCode("861")
                 .email("email")

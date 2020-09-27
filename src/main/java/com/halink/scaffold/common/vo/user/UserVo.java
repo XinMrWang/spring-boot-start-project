@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserVo {
     @ApiModelProperty(value = "用户名")
+    @NotEmpty(message = "nmd不能为空")
     private String username;
     @ApiModelProperty(value = "邮箱")
     private String email;
