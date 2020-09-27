@@ -5,12 +5,12 @@
     <!--@mbg.generated-->
     <!--@Table mgt_user-->
     <id column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="user_name" jdbcType="VARCHAR" property="username" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
-    <result column="regist_time" jdbcType="TIMESTAMP" property="registTime" />
+    <result column="register_time" jdbcType="TIMESTAMP" property="registerTime" />
     <result column="status" jdbcType="TINYINT" property="status" />
     <result column="mark_deleted" jdbcType="BOOLEAN" property="markDeleted" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -19,8 +19,8 @@
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    user_id, user_name, `password`, email, area_code, phone, regist_time, `status`, mark_deleted, 
-    gmt_modified, last_login_time, head_pic
+    user_id, username, `password`, email, area_code, phone, register_time, `status`, 
+    mark_deleted, gmt_modified, last_login_time, head_pic
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
@@ -36,16 +36,16 @@
   </delete>
   <insert id="insert" parameterType="com.halink.scaffold.common.entity.User">
     <!--@mbg.generated-->
-    insert into mgt_user (user_id, user_name, `password`,
-    email, area_code, phone,
-    regist_time, `status`, mark_deleted,
-    gmt_modified, last_login_time, head_pic
-    )
-    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-    #{email,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
-    #{registTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{markDeleted,jdbcType=BOOLEAN},
-    #{gmtModified,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{headPic,jdbcType=VARCHAR}
-    )
+    insert into mgt_user (user_id, username, `password`, 
+      email, area_code, phone, 
+      register_time, `status`, mark_deleted, 
+      gmt_modified, last_login_time, head_pic
+      )
+    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{areaCode,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{registerTime,jdbcType=TIMESTAMP}, #{status,jdbcType=TINYINT}, #{markDeleted,jdbcType=BOOLEAN}, 
+      #{gmtModified,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{headPic,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.halink.scaffold.common.entity.User">
     <!--@mbg.generated-->
@@ -55,7 +55,7 @@
         user_id,
       </if>
       <if test="username != null">
-        user_name,
+        username,
       </if>
       <if test="password != null">
         `password`,
@@ -69,8 +69,8 @@
       <if test="phone != null">
         phone,
       </if>
-      <if test="registTime != null">
-        regist_time,
+      <if test="registerTime != null">
+        register_time,
       </if>
       <if test="status != null">
         `status`,
@@ -107,8 +107,8 @@
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="registTime != null">
-        #{registTime,jdbcType=TIMESTAMP},
+      <if test="registerTime != null">
+        #{registerTime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         #{status,jdbcType=TINYINT},
@@ -132,7 +132,7 @@
     update mgt_user
     <set>
       <if test="username != null">
-        user_name = #{username,jdbcType=VARCHAR},
+        username = #{username,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         `password` = #{password,jdbcType=VARCHAR},
@@ -146,8 +146,8 @@
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="registTime != null">
-        regist_time = #{registTime,jdbcType=TIMESTAMP},
+      <if test="registerTime != null">
+        register_time = #{registerTime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         `status` = #{status,jdbcType=TINYINT},
@@ -167,99 +167,4 @@
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.halink.scaffold.common.entity.User">
-    <!--@mbg.generated-->
-    update mgt_user
-    set user_name = #{username,jdbcType=VARCHAR},
-    `password` = #{password,jdbcType=VARCHAR},
-    email = #{email,jdbcType=VARCHAR},
-    area_code = #{areaCode,jdbcType=VARCHAR},
-    phone = #{phone,jdbcType=VARCHAR},
-    regist_time = #{registTime,jdbcType=TIMESTAMP},
-    `status` = #{status,jdbcType=TINYINT},
-    mark_deleted = #{markDeleted,jdbcType=BOOLEAN},
-    gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-    last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
-    head_pic = #{headPic,jdbcType=VARCHAR}
-    where user_id = #{userId,jdbcType=BIGINT}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update mgt_user
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="user_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.username,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="`password` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.password,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="email = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.email,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="area_code = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.areaCode,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="phone = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.phone,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="regist_time = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.registTime,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="`status` = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.status,jdbcType=TINYINT}
-        </foreach>
-      </trim>
-      <trim prefix="mark_deleted = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.markDeleted,jdbcType=BOOLEAN}
-        </foreach>
-      </trim>
-      <trim prefix="gmt_modified = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.gmtModified,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="last_login_time = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.lastLoginTime,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="head_pic = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when user_id = #{item.userId,jdbcType=BIGINT} then #{item.headPic,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-    </trim>
-    where user_id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.userId,jdbcType=BIGINT}
-    </foreach>
-  </update>
-  <insert id="batchInsert" parameterType="map">
-    <!--@mbg.generated-->
-    insert into mgt_user
-    (user_id, user_name, `password`, email, area_code, phone, regist_time, `status`, 
-      mark_deleted, gmt_modified, last_login_time, head_pic)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.userId,jdbcType=BIGINT}, #{item.username,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR},
-      #{item.email,jdbcType=VARCHAR}, #{item.areaCode,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR},
-      #{item.registTime,jdbcType=TIMESTAMP}, #{item.status,jdbcType=TINYINT}, #{item.markDeleted,jdbcType=BOOLEAN},
-      #{item.gmtModified,jdbcType=TIMESTAMP}, #{item.lastLoginTime,jdbcType=TIMESTAMP},
-      #{item.headPic,jdbcType=VARCHAR})
-    </foreach>
-  </insert>
 </mapper>

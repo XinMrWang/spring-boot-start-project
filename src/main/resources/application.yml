@@ -40,11 +40,12 @@ spring:
       force: true
       enabled: true
       charset: UTF-8
-  redis:
-    host: 127.0.0.1
-    port: 6379
-token:
-  expiration-milli-seconds: 7200
+redis:
+  host: 127.0.0.1
+  port: 6379
+  timeout: 86400
+  password:
+  clusterNodes:
 
 mybatis:
   configuration:

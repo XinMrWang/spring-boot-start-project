@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.halink.scaffold.common.entity.Permission">
     <!--@mbg.generated-->
     <!--@Table mgt_permission-->
-    <id column="permission_id" jdbcType="INTEGER" property="permissionId" />
+    <id column="permission_id" jdbcType="BIGINT" property="permissionId" />
     <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
     <result column="user_create" jdbcType="BIGINT" property="userCreate" />
     <result column="user_modified" jdbcType="BIGINT" property="userModified" />
@@ -19,17 +19,17 @@
     permission_id, permission_name, user_create, user_modified, gmt_create, gmt_modified, 
     dependency_id, pid, permission_code
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 
     <include refid="Base_Column_List" />
     from mgt_permission
-    where permission_id = #{permissionId,jdbcType=INTEGER}
+    where permission_id = #{permissionId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     <!--@mbg.generated-->
     delete from mgt_permission
-    where permission_id = #{permissionId,jdbcType=INTEGER}
+    where permission_id = #{permissionId,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="permission_id" keyProperty="permissionId" parameterType="com.halink.scaffold.common.entity.Permission" useGeneratedKeys="true">
     <!--@mbg.generated-->
@@ -125,81 +125,6 @@
         permission_code = #{permissionCode,jdbcType=INTEGER},
       </if>
     </set>
-    where permission_id = #{permissionId,jdbcType=INTEGER}
+    where permission_id = #{permissionId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.halink.scaffold.common.entity.Permission">
-    <!--@mbg.generated-->
-    update mgt_permission
-    set permission_name = #{permissionName,jdbcType=VARCHAR},
-      user_create = #{userCreate,jdbcType=BIGINT},
-      user_modified = #{userModified,jdbcType=BIGINT},
-      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
-      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
-      dependency_id = #{dependencyId,jdbcType=BIGINT},
-      pid = #{pid,jdbcType=BIGINT},
-      permission_code = #{permissionCode,jdbcType=INTEGER}
-    where permission_id = #{permissionId,jdbcType=INTEGER}
-  </update>
-  <update id="updateBatch" parameterType="java.util.List">
-    <!--@mbg.generated-->
-    update mgt_permission
-    <trim prefix="set" suffixOverrides=",">
-      <trim prefix="permission_name = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when permission_id = #{item.permissionId,jdbcType=INTEGER} then #{item.permissionName,jdbcType=VARCHAR}
-        </foreach>
-      </trim>
-      <trim prefix="user_create = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when permission_id = #{item.permissionId,jdbcType=INTEGER} then #{item.userCreate,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="user_modified = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when permission_id = #{item.permissionId,jdbcType=INTEGER} then #{item.userModified,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="gmt_create = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when permission_id = #{item.permissionId,jdbcType=INTEGER} then #{item.gmtCreate,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="gmt_modified = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when permission_id = #{item.permissionId,jdbcType=INTEGER} then #{item.gmtModified,jdbcType=TIMESTAMP}
-        </foreach>
-      </trim>
-      <trim prefix="dependency_id = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when permission_id = #{item.permissionId,jdbcType=INTEGER} then #{item.dependencyId,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="pid = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when permission_id = #{item.permissionId,jdbcType=INTEGER} then #{item.pid,jdbcType=BIGINT}
-        </foreach>
-      </trim>
-      <trim prefix="permission_code = case" suffix="end,">
-        <foreach collection="list" index="index" item="item">
-          when permission_id = #{item.permissionId,jdbcType=INTEGER} then #{item.permissionCode,jdbcType=INTEGER}
-        </foreach>
-      </trim>
-    </trim>
-    where permission_id in
-    <foreach close=")" collection="list" item="item" open="(" separator=", ">
-      #{item.permissionId,jdbcType=INTEGER}
-    </foreach>
-  </update>
-  <insert id="batchInsert" keyColumn="permission_id" keyProperty="permissionId" parameterType="map" useGeneratedKeys="true">
-    <!--@mbg.generated-->
-    insert into mgt_permission
-    (permission_name, user_create, user_modified, gmt_create, gmt_modified, dependency_id, 
-      pid, permission_code)
-    values
-    <foreach collection="list" item="item" separator=",">
-      (#{item.permissionName,jdbcType=VARCHAR}, #{item.userCreate,jdbcType=BIGINT}, #{item.userModified,jdbcType=BIGINT}, 
-        #{item.gmtCreate,jdbcType=TIMESTAMP}, #{item.gmtModified,jdbcType=TIMESTAMP}, #{item.dependencyId,jdbcType=BIGINT}, 
-        #{item.pid,jdbcType=BIGINT}, #{item.permissionCode,jdbcType=INTEGER})
-    </foreach>
-  </insert>
 </mapper>

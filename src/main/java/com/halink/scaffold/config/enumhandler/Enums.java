@@ -2,6 +2,7 @@ package com.halink.scaffold.config.enumhandler;
 
 import com.halink.scaffold.common.enumerate.BaseEnum;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Method;
@@ -12,7 +13,6 @@ import static com.google.common.collect.Maps.newLinkedHashMap;
 import static com.google.common.collect.Maps.newLinkedHashMapWithExpectedSize;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
-import static org.apache.commons.beanutils.PropertyUtils.getPropertyDescriptor;
 import static org.apache.commons.lang3.ArrayUtils.isEmpty;
 
 @Slf4j
@@ -32,7 +32,7 @@ public class Enums {
         Map<BaseEnum, Object> result = newLinkedHashMapWithExpectedSize(enumValues.length * 2);
         try {
             for (Object enumValue : enumValues) {
-                PropertyDescriptor pd = getPropertyDescriptor(enumValue, prop);
+                PropertyDescriptor pd = BeanUtils.getPropertyDescriptor(enumValue.getClass(), prop);
                 if (pd == null || pd.getReadMethod() == null) {
                     continue;
                 }
@@ -58,7 +58,7 @@ public class Enums {
         }
         try {
             for (T enumValue : enumValues) {
-                PropertyDescriptor pd = getPropertyDescriptor(enumValue, prop);
+                PropertyDescriptor pd = BeanUtils.getPropertyDescriptor(enumValue.getClass(), prop);
                 if (pd == null || pd.getReadMethod() == null) {
                     continue;
                 }

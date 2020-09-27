@@ -1,63 +1,66 @@
 package com.halink.scaffold.common.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.util.Date;
 
-/**
- * 用户
- *
- * @author halink
- */
+@ApiModel(value = "用户表")
 @Data
-@Builder
-@NoArgsConstructor
+@SuperBuilder
 @AllArgsConstructor
-public class User {
+@NoArgsConstructor
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
+    @ApiModelProperty(value = "")
     private Long userId;
     /**
      * 用户名
      */
+    @ApiModelProperty(value = "用户名")
     private String username;
-
     /**
      * 密码
      */
+    @ApiModelProperty(value = "密码")
     private String password;
-
     /**
      * 邮箱
      */
+    @ApiModelProperty(value = "邮箱")
     private String email;
-
+    @ApiModelProperty(value = "")
     private String areaCode;
-
+    @ApiModelProperty(value = "")
     private String phone;
-
     /**
      * 注册时间
      */
-    private Date registTime;
-
+    @ApiModelProperty(value = "注册时间")
+    private Date registerTime;
     /**
      * 状态：1，正常；2，试用；3，失效
      */
+    @ApiModelProperty(value = "状态：1，正常；2，试用；3，失效")
     private Byte status;
-
+    @ApiModelProperty(value = "")
     private Boolean markDeleted;
-
     /**
      * 最近更新时间
      */
+    @ApiModelProperty(value = "最近更新时间")
     private Date gmtModified;
-
     /**
      * 最后登录时间
      */
+    @ApiModelProperty(value = "最后登录时间")
     private Date lastLoginTime;
-
+    @ApiModelProperty(value = "头像")
     private String headPic;
 }

@@ -1,23 +1,16 @@
 package com.halink.scaffold.modular.mapper;
 
-import com.halink.scaffold.common.entity.Permission;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.halink.scaffold.common.entity.Permission;import org.apache.ibatis.annotations.Param;import java.util.List;
 
 public interface PermissionMapper {
-    int deleteByPrimaryKey(Integer permissionId);
+    int deleteByPrimaryKey(Long permissionId);
 
     int insert(Permission record);
 
     int insertSelective(Permission record);
 
-    Permission selectByPrimaryKey(Integer permissionId);
+    Permission selectByPrimaryKey(Long permissionId);
 
     int updateByPrimaryKeySelective(Permission record);
 
-    int updateByPrimaryKey(Permission record);
-
-    int updateBatch(List<Permission> list);
-
-    int batchInsert(@Param("list") List<Permission> list);
 }

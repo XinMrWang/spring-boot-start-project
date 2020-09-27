@@ -1,8 +1,6 @@
 package com.halink.scaffold.modular.mapper;
 
-import com.halink.scaffold.common.entity.Role;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.halink.scaffold.common.entity.Role;import org.apache.ibatis.annotations.Param;import java.util.List;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Long roleId);
@@ -15,9 +13,4 @@ public interface RoleMapper {
 
     int updateByPrimaryKeySelective(Role record);
 
-    int updateByPrimaryKey(Role record);
-
-    int updateBatch(List<Role> list);
-
-    int batchInsert(@Param("list") List<Role> list);
 }

@@ -1,8 +1,7 @@
 package com.halink.scaffold.modular.mapper;
 
 import com.halink.scaffold.common.entity.RolePermissionRelation;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Param;import java.util.List;
 
 public interface RolePermissionRelationMapper {
     int deleteByPrimaryKey(@Param("roleId") Long roleId, @Param("permissionId") Long permissionId);
@@ -15,9 +14,4 @@ public interface RolePermissionRelationMapper {
 
     int updateByPrimaryKeySelective(RolePermissionRelation record);
 
-    int updateByPrimaryKey(RolePermissionRelation record);
-
-    int updateBatch(List<RolePermissionRelation> list);
-
-    int batchInsert(@Param("list") List<RolePermissionRelation> list);
 }

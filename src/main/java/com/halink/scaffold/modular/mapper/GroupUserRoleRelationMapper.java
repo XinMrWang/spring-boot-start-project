@@ -1,8 +1,7 @@
 package com.halink.scaffold.modular.mapper;
 
 import com.halink.scaffold.common.entity.GroupUserRoleRelation;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Param;import java.util.List;
 
 public interface GroupUserRoleRelationMapper {
     int deleteByPrimaryKey(@Param("groupId") Long groupId, @Param("userId") Long userId, @Param("roleId") Long roleId);
@@ -15,9 +14,4 @@ public interface GroupUserRoleRelationMapper {
 
     int updateByPrimaryKeySelective(GroupUserRoleRelation record);
 
-    int updateByPrimaryKey(GroupUserRoleRelation record);
-
-    int updateBatch(List<GroupUserRoleRelation> list);
-
-    int batchInsert(@Param("list") List<GroupUserRoleRelation> list);
 }

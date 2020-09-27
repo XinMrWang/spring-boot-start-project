@@ -17,8 +17,7 @@ import java.util.stream.Stream;
 /**
  * @author halink
  */
-public class CustomEnumDeserializer extends JsonDeserializer<BaseEnum> implements
-        ContextualDeserializer {
+public class CustomEnumDeserializer extends JsonDeserializer<BaseEnum> implements ContextualDeserializer {
 
     @Setter
     private Class<BaseEnum> enumCls;
