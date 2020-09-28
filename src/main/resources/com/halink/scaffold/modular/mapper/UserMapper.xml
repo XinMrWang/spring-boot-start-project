@@ -47,7 +47,7 @@
       #{gmtModified,jdbcType=TIMESTAMP}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{headPic,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.halink.scaffold.common.entity.User">
+  <insert id="insertSelective" parameterType="com.halink.scaffold.common.entity.User" keyColumn="user_id" keyProperty="userId"  useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into mgt_user
     <trim prefix="(" suffix=")" suffixOverrides=",">

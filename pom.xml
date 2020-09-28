@@ -5,10 +5,10 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.3.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.lsc</groupId>
+    <groupId>com.halink</groupId>
     <artifactId>start-project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>start-project</name>
@@ -16,7 +16,6 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <jjwt.version>0.9.1</jjwt.version>
         <httpclient.version>4.5.10</httpclient.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <commons-collections4.version>4.4</commons-collections4.version>
@@ -24,6 +23,8 @@
         <mybatis.version>2.1.1</mybatis.version>
         <springfox.version>3.0.0</springfox.version>
         <springboot-admin.version>2.2.3</springboot-admin.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
@@ -61,13 +62,6 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis.version}</version>
         </dependency>
-        <!--httpclient-->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>${httpclient.version}</version>
-        </dependency>
-        <!-- redis -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
@@ -102,6 +96,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>2.0.2</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -120,29 +119,11 @@
         <profile>
             <id>dev</id>
             <properties>
-                <!-- 环境标识，需要与配置文件的名称相对应 -->
                 <profileActive>dev</profileActive>
             </properties>
             <activation>
-                <!-- 默认环境 -->
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <build>
-                <finalName>startProject</finalName>
-                <!-- profile对资源的操作 -->
-                <resources>
-                    <!-- IDE 开发和调试时需要将配置文件打包到编译目录 -->
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <targetPath>${project.build.directory}/classes</targetPath>
-                        <filtering>true</filtering>
-                        <includes>
-                            <include>application.yml</include>
-                            <include>application-${profileActive}.yml</include>
-                        </includes>
-                    </resource>
-                </resources>
-            </build>
         </profile>
         <profile>
             <id>test</id>
@@ -159,78 +140,54 @@
     </profiles>
 
     <build>
-        <finalName>startProject</finalName>
+        <finalName>start-project</finalName>
         <plugins>
             <!-- 打包成jar -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
             </plugin>
-            <!-- 通过插件将资源打包为一个tar.gz压缩包 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <!-- The configuration of the plugin -->
-                <configuration>
-                    <!-- Specifies the configuration file of the assembly plugin -->
-                    <descriptors>
-                        <descriptor>src/package.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>make-assembly</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version><!-- 3.1 is the minimum -->
+                <version>3.5.1</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                    <encoding>${project.build.sourceEncoding}</encoding>
-                    <showWarnings>true</showWarnings>
-                    <verbose>true</verbose>
-                    <fork>true</fork>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
         </plugins>
         <!-- profile对资源的操作 -->
         <resources>
             <resource>
-                <directory>src/main/resources</directory>
-                <excludes>
-                    <!--                    <exclude>logback.xml</exclude>-->
-                    <exclude>application*.yml</exclude>
-                </excludes>
+                <directory>src/main/docker</directory>
+                <targetPath>${project.basedir}/target</targetPath>
             </resource>
-            <!-- 打包后的目录及文件(配合) -->
             <resource>
                 <directory>src/main/resources</directory>
-                <!-- 是否替换@xx@表示的maven properties属性值 -->
+                <excludes>
+                    <exclude>application*.yaml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-                <targetPath>${project.build.directory}/config</targetPath>
                 <includes>
-                    <!--                    <include>logback.xml</include>-->
-                    <include>application.yml</include>
-                    <include>application-${profileActive}.yml</include>
+                    <include>application.yaml</include>
+                    <include>application-${profileActive}.yaml</include>
                 </includes>
             </resource>
         </resources>
     </build>
+
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/libs-milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 </project>

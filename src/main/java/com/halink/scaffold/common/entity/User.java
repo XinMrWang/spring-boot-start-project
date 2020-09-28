@@ -1,10 +1,10 @@
 package com.halink.scaffold.common.entity;
 
+import com.halink.scaffold.common.enumerate.UserStatuesEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -48,7 +48,7 @@ public class User implements Serializable {
      * 状态：1，正常；2，试用；3，失效
      */
     @ApiModelProperty(value = "状态：1，正常；2，试用；3，失效")
-    private Byte status;
+    private UserStatuesEnum status;
     @ApiModelProperty(value = "")
     private Boolean markDeleted;
     /**

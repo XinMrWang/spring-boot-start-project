@@ -6,7 +6,7 @@ import com.halink.scaffold.common.constant.ExceptionMessageConstants;
 /**
  * 接收枚举数据异常
  *
- * @author LiKeshuang
+ * @author halink
  * @date 2020/9/27 6:49 下午
  */
 public class AcceptEnumFormatException extends BaseException {

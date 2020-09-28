@@ -22,9 +22,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * @description:
- * @author: zhuanglunhang
- * @create: 2020-05-07 14:36
+ * @author zhuanglunhang
  */
 @Configuration
 public class RedisFactory implements InvocationHandler {

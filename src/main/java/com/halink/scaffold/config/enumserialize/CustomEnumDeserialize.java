@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * 反序列化
  *
- * @author LiKeshuang
+ * @author halink
  * @date 2020/9/27 5:16 下午
  */
 public class CustomEnumDeserialize extends JsonDeserializer<BaseEnum> {

@@ -6,52 +6,27 @@ server:
     context-path: /
 
 spring:
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      # 连接池名
-      pool-name: MyHikariCP
-      # 最小空闲连接数量
-      minimum-idle: 5
-      # 空闲连接存活最大时间
-      idle-timeout: 60000
-      # 连接池最大连接数
-      maximum-pool-size: 20
-      # 从池返回的连接的默认自动提交行为
-      auto-commit: true
-      # 池中连接的最长生命周期
-      max-lifetime: 1800000
-      # 数据库连接超时时间
-      connection-timeout: 30000
+  profiles:
+    active: dev
   mvc:
     throw-exception-if-no-handler-found:
       true
-  profiles:
-    active: @profileActive@
-  # 设置文件上传限制
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      pool-name: MyHikariCP
+      minimum-idle: 5
+      idle-timeout: 60000
+      maximum-pool-size: 20
+      auto-commit: true
+      max-lifetime: 1800000
+      connection-timeout: 30000
   servlet:
     multipart:
-      # 单个文件最大
       max-file-size: 50MB
-      # 总上传数据大小
       max-request-size: 100MB
-  http:
-    encoding:
-      force: true
-      enabled: true
-      charset: UTF-8
-redis:
-  host: 127.0.0.1
-  port: 6379
-  timeout: 86400
-  password:
-  clusterNodes:
-
 mybatis:
   configuration:
-    #打印sql执行信息 setDefaultEnumTypeHandler
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    # 配置默认的枚举转换器
-    default-enum-type-handler: com.halink.scaffold.config.enumhandler.AutoConversionHandler
-    # 开启驼峰命名
+    default-enum-type-handler: com.halink.scaffold.config.mybatisenumhandler.AutoConversionHandler
     map-underscore-to-camel-case: true

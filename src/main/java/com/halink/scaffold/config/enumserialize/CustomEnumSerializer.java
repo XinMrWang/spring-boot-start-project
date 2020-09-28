@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * 序列化
  *
- * @author LiKeshuang
+ * @author halink
  * @date 2020/9/27 5:16 下午
  */
 public class CustomEnumSerializer extends JsonSerializer<BaseEnum> {

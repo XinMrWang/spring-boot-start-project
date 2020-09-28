@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * 数组序列化
  *
- * @author LiKeshuang
+ * @author halink
  * @date 2020/9/27 5:16 下午
  */
 public class CustomListEnumSerializer extends JsonSerializer<List<BaseEnum>> {

@@ -18,7 +18,7 @@ public abstract class BaseException extends RuntimeException {
     /**
      * 错误信息
      */
-    private String errorMsg;
+    private final String errorMsg;
 
     public BaseException(String errorMsg) {
         super(errorMsg);

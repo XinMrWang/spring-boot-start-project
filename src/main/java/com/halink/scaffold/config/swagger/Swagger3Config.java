@@ -14,7 +14,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 /**
  * swagger3配置文件
  *
- * @author LiKeshuang
+ * @author halink
  * @date 2020/9/24 5:44 下午
  */
 @Configuration
@@ -31,9 +31,9 @@ public class Swagger3Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("Swagger3接口文档")
-                .description("更多请咨询服务开发者Ray。")
-                .contact(new Contact("Ray。", "http://www.ruiyeclub.cn", "ruiyeclub@foxmail.com"))
+                .title("halink脚手架接口文档")
+                .description("接口文档")
+                .contact(new Contact("HaLink ", "https://github.com/halink", "lsc0903@foxmail.com"))
                 .version("1.0")
                 .build();
     }

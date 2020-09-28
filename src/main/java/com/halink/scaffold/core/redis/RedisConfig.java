@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @description: redis配置类
- * @author: zhuanglunhang
- * @create: 2020-05-07 15:09
+ * @author zhuanglunhang
  */
 @Data
 @Configuration
