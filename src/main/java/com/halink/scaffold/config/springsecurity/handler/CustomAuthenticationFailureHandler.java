@@ -3,6 +3,7 @@ package com.halink.scaffold.config.springsecurity.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.halink.scaffold.common.constant.ResponseCodeConstants;
 import com.halink.scaffold.common.constant.ResponseMessageConstants;
+import com.halink.scaffold.common.exception.CustomAuthenticationException;
 import com.halink.scaffold.core.util.ResultUtil;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -27,11 +28,17 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json");
         response.setCharacterEncoding("utf-8");
+        String message;
+        if (e instanceof CustomAuthenticationException) {
+            message = e.getLocalizedMessage();
+        } else {
+            message = ResponseMessageConstants.LOGIN_FAILURE;
+        }
         response.getWriter().write(
                 objectMapper.writeValueAsString(
                         ResultUtil.response(
                                 ResponseCodeConstants.LOGIN_FAILURE,
-                                ResponseMessageConstants.LOGIN_FAILURE
+                                message
                         )
                 )
         );

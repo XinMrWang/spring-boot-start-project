@@ -10,7 +10,7 @@ import com.halink.scaffold.common.vo.ResponseResult;
  * @author halink
  * @date 2019/11/26 6:19 下午
  */
-public class ResultUtil {
+public class ResultUtil<T> {
 
     public static ResponseResult success(Object data) {
         return ResponseResult.builder()

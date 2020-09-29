@@ -1,8 +1,9 @@
 package com.halink.scaffold.config.springsecurity;
 
 
+import com.halink.scaffold.config.springsecurity.filter.ValidateCodeFilter;
 import com.halink.scaffold.config.springsecurity.handler.*;
-import com.halink.scaffold.modular.service.impl.MyUserDetailsServiceImpl;
+import com.halink.scaffold.config.springsecurity.service.MyUserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -27,7 +29,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/*",
             "/swagger-resources/**",
             "/v3/api-docs",
-            "/webjars/**"
+            "/webjars/**",
+            "/api/verification-code/**"
     };
     /**
      * 未登陆时返回 JSON 格式的数据给前端（否则为 html）
@@ -53,6 +56,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      * 自定义user
      */
     private final MyUserDetailsServiceImpl userDetailsService;
+    /**
+     * 验证码
+     */
+    private final ValidateCodeFilter validateCodeFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -63,6 +70,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
                 .antMatchers(PASS_URL).permitAll()
                 .anyRequest().authenticated()

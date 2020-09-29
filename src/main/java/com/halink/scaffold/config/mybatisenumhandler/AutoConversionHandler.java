@@ -40,16 +40,16 @@ public class AutoConversionHandler<E extends Enum<E>> extends BaseTypeHandler<E>
 
     @Override
     public E getNullableResult(ResultSet rs, String columnName) throws SQLException {
-        return (E) typeHandler.getNullableResult(rs, columnName);
+        return typeHandler.getNullableResult(rs, columnName);
     }
 
     @Override
     public E getNullableResult(ResultSet rs, int columnIndex) throws SQLException {
-        return (E) typeHandler.getNullableResult(rs, columnIndex);
+        return typeHandler.getNullableResult(rs, columnIndex);
     }
 
     @Override
     public E getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return (E) typeHandler.getNullableResult(cs, columnIndex);
+        return typeHandler.getNullableResult(cs, columnIndex);
     }
 }
