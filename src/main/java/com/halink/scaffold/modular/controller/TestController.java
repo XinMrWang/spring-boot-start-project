@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
 
 /**
@@ -23,14 +24,15 @@ import javax.validation.constraints.NotEmpty;
 @Validated
 @RestController
 @RequiredArgsConstructor
-public class LoginController {
+@RequestMapping("/test")
+public class TestController {
 
     private final UserMapper userMapper;
 
     @SuccessResponse
     @RequestMapping("/login")
     @ApiOperation("测试接口")
-    public UserVo login(@NotEmpty(message = "这玩意儿不能为空") String a) {
+    public UserVo login(@Valid @NotEmpty(message = "这玩意儿不能为空") String a) {
         User user = User.builder().status(UserStatuesEnum.NORMAL).password("$2a$10$5Am5J8RDnBslVJje.C89S.jAPC2k98Zc4sRO2E2epQxuCtb5mZ9Xe").build();
         userMapper.insertSelective(user);
         userMapper.selectByPrimaryKey(user.getUserId());

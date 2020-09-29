@@ -23,7 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String[] SWAGGER = {
+    private static final String[] PASS_URL = {
             "/swagger-ui/*",
             "/swagger-resources/**",
             "/v3/api-docs",
@@ -64,9 +64,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                // TODO 便于测试,联调登录的时候删了
-                .antMatchers(SWAGGER).permitAll()
-                .antMatchers("/api/user/register", "/api/user/checkUsername").permitAll()
+                .antMatchers(PASS_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic().authenticationEntryPoint(authenticationEntryPoint)
