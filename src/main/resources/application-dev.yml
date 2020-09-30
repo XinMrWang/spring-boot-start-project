@@ -5,7 +5,18 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-    
+  boot:
+    admin:
+      client:
+        url: localhost:8611
+management:
+  endpoints:
+    web:
+      exposure:
+        include: *
+  endpoint:
+    health:
+      show-details: always
 redis:
   host: 127.0.0.1
   port: 6379

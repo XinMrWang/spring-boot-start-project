@@ -165,15 +165,15 @@
             <resource>
                 <directory>src/main/resources</directory>
                 <excludes>
-                    <exclude>application*.yaml</exclude>
+                    <exclude>application*.yml</exclude>
                 </excludes>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
                 <includes>
-                    <include>application.yaml</include>
-                    <include>application-${profileActive}.yaml</include>
+                    <include>application.yml</include>
+                    <include>application-${profileActive}.yml</include>
                 </includes>
             </resource>
         </resources>

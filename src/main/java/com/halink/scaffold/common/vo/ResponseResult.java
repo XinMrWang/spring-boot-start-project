@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResponseResult<T> {
-    private T data;
+public class ResponseResult {
+    private Object data;
     private String message;
     private Integer code;
 }
