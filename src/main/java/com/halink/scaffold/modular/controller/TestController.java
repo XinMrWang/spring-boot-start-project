@@ -1,6 +1,5 @@
 package com.halink.scaffold.modular.controller;
 
-import com.google.common.collect.Lists;
 import com.halink.scaffold.common.entity.User;
 import com.halink.scaffold.common.enumerate.UserStatuesEnum;
 import com.halink.scaffold.common.vo.user.UserVo;
@@ -10,11 +9,11 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 
 /**
  * @author halink
@@ -32,10 +31,13 @@ public class TestController {
     @SuccessResponse
     @RequestMapping("/login")
     @ApiOperation("测试接口")
-    public UserVo login(@Valid @NotEmpty(message = "这玩意儿不能为空") String a) {
-        User user = User.builder().status(UserStatuesEnum.NORMAL).password("$2a$10$5Am5J8RDnBslVJje.C89S.jAPC2k98Zc4sRO2E2epQxuCtb5mZ9Xe").build();
+    public UserVo login(@Valid @RequestBody UserVo userVo) {
+        System.out.println(userVo);
+        User user = User.builder().status(UserStatuesEnum.NORMAL).password("$2a$10$5Am5J8RDnBslVJje.C89S.jAPC2k98Zc4sRO2E2epQxuCtb5mZ9Xe")
+                .lastLoginTime(userVo.getLastLoginTime())
+                .build();
         userMapper.insertSelective(user);
-        userMapper.selectByPrimaryKey(user.getUserId());
-        return UserVo.builder().status(Lists.newArrayList(UserStatuesEnum.NORMAL, UserStatuesEnum.NORMAL)).build();
+        User user1 = userMapper.selectByPrimaryKey(user.getUserId());
+        return UserVo.builder().status(UserStatuesEnum.NORMAL).lastLoginTime(user1.getLastLoginTime()).build();
     }
 }

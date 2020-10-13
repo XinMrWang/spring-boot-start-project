@@ -37,7 +37,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) {
-        User user = userMapper.selectByPrimaryKey(0L);
+        User user = userMapper.selectByPrimaryKey(1L);
         if (user == null) {
             log.error("username not found! username:{}", username);
             throw new UsernameNotFoundException("用户不存在");

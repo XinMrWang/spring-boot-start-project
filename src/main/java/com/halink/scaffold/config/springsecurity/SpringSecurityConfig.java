@@ -30,7 +30,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**",
             "/v3/api-docs",
             "/webjars/**",
-            "/api/verification-code/**"
+            "/api/verification-code/**",
+            "/actuator/**"
     };
     /**
      * 未登陆时返回 JSON 格式的数据给前端（否则为 html）
