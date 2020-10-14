@@ -36,8 +36,9 @@ public class CustomEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTyp
         int value = rs.getInt(columnName);
         if (rs.wasNull()) {
             return null;
+        } else {
+            return codeOf(value);
         }
-        return codeOf(value);
     }
 
     @Override
@@ -45,8 +46,9 @@ public class CustomEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTyp
         int value = rs.getInt(columnIndex);
         if (rs.wasNull()) {
             return null;
+        } else {
+            return codeOf(value);
         }
-        return codeOf(value);
     }
 
     @Override
@@ -54,8 +56,9 @@ public class CustomEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTyp
         int value = cs.getInt(columnIndex);
         if (cs.wasNull()) {
             return null;
+        } else {
+            return codeOf(value);
         }
-        return codeOf(value);
     }
 
     private E codeOf(int value) {
