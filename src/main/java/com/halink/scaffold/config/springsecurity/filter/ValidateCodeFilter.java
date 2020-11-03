@@ -2,7 +2,7 @@ package com.halink.scaffold.config.springsecurity.filter;
 
 import com.halink.scaffold.common.constant.ExceptionMessageConstants;
 import com.halink.scaffold.common.exception.CustomAuthenticationException;
-import com.halink.scaffold.core.redis.RedisClient;
+import com.halink.scaffold.core.redis.RedisUtils;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -24,7 +24,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class ValidateCodeFilter extends OncePerRequestFilter {
 
-    private final RedisClient redisClient;
+    private final RedisUtils redisUtils;
     private final AuthenticationFailureHandler authenticationFailureHandler;
 
     @Override
@@ -39,13 +39,13 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
                 return;
             }
             String jSessionId = request.getSession().getId();
-            String sysCode = redisClient.get(jSessionId);
+            String sysCode = String.valueOf(redisUtils.get(jSessionId));
             if (StringUtils.isEmpty(sysCode)) {
                 authenticationFailureHandler.onAuthenticationFailure(request, response,
                         CustomAuthenticationException.getInstance(ExceptionMessageConstants.IMAGE_VERIFICATION_CODE_EXPIRED_EXCEPTION));
                 return;
             }
-            redisClient.del(jSessionId);
+            redisUtils.del(jSessionId);
             if (StringUtils.isEmpty(code)) {
                 authenticationFailureHandler.onAuthenticationFailure(request, response,
                         CustomAuthenticationException.getInstance(ExceptionMessageConstants.IMAGE_VERIFICATION_CODE_IS_NULL_EXCEPTION));

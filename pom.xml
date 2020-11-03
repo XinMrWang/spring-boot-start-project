@@ -63,8 +63,12 @@
             <version>${mybatis.version}</version>
         </dependency>
         <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
         </dependency>
         <!-- security -->
         <dependency>
@@ -167,6 +171,10 @@
                 <excludes>
                     <exclude>application*.yml</exclude>
                 </excludes>
+            </resource>
+            <resource>
+                <directory>./config</directory>
+                <targetPath>${project.basedir}/target/config</targetPath>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
