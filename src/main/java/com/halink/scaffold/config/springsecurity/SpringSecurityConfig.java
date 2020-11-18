@@ -31,7 +31,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
             "/v3/api-docs",
             "/webjars/**",
             "/api/verification-code/**",
-            "/actuator/**"
+            "/actuator/**",
+            "/druid/**"
     };
     /**
      * 未登陆时返回 JSON 格式的数据给前端（否则为 html）

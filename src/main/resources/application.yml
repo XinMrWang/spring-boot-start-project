@@ -14,15 +14,49 @@ spring:
     throw-exception-if-no-handler-found:
       true
   datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    hikari:
-      pool-name: MyHikariCP
-      minimum-idle: 5
-      idle-timeout: 60000
-      maximum-pool-size: 20
-      auto-commit: true
-      max-lifetime: 1800000
-      connection-timeout: 30000
+    druid:
+      # 初始化大小
+      initial-size: 5
+      max-active: 100
+      min-idle: 5
+      # 获取连接等待超时时间
+      max-wait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      # 配置一个连接在池中的最小生存时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1 FROM DUAL
+      validation-query-timeout: 60000
+      # 建议配置为true，不影响性能，并且保证安全性。申请连接的时候检测，
+      # 如果空闲时间大于timeBetweenEvictionRunsMillis，执行validationQuery检测连接是否有效
+      test-while-idle: true
+      # 申请连接时检测连接是否有效
+      test-on-borrow: false
+      # 归还连接时检测连接是否有效
+      test-on-return: false
+      # 打开PSCache,并且指定每个连接上的PSCache大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      # 配置监控统计拦截的 Filter，去掉后监控界面 SQL 无法统计，wall 用于防火墙
+      filters: stat,wall,slf4j
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: "*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*" #不统计这些请求数据
+      stat-view-servlet: #访问监控网页的登录用户名和密码
+        enabled: true
+        url-pattern: /druid/*
+        reset-enable: false
+        # 添加IP白名单
+        # allow: 127.0.0.1
+        login-username: admin
+        login-password: 123456
+        # 添加IP黑名单，当白名单和黑名单重复时，黑名单优先级更高
+        #deny:
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connect-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
   servlet:
     multipart:
       max-file-size: 50MB
